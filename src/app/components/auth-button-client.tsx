@@ -1,6 +1,5 @@
 'use client'
 import { type Session, createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
 import { useRouter } from 'next/navigation'
 
 export default function AthButtonClient({ session }: { session: Session | null }) {
