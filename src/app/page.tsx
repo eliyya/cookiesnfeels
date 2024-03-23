@@ -1,22 +1,6 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-import { redirect } from 'next/navigation'
-
-//components
-import Image from "next/image";
-import Nav from "./components/nav";
+import Nav from "@/components/nav";
 
 export default async function Home() {
-  const supabase = createServerComponentClient({ cookies })
-  const { data: { session } } = await supabase.auth.getSession()
-  if (session == null) {
-    redirect('/login')
-
-  }
-  const { data: posts } = await supabase.from('posts').select()
-
-
-  // console.log(posts)
   return (
     <main className="h-screen w-screen">
       <Nav />
@@ -30,22 +14,10 @@ export default async function Home() {
           </ul>
         </div>
         <div className="col-span-8 flex flex-col justify-center items-center">
-
           <main className="flex flex-col justify-center items-center bg">
-            {/* <pre>
-              {
-                JSON.stringify(posts, null, 2)
-              }
-            </pre> */}
-
-
-
           </main>
-
         </div>
-
       </div>
-
     </main>
   );
 }

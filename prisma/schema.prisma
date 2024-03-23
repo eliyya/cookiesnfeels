@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("NEXT_DATABASE_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model facebook_connection {
+  id       String    @id
+  email    String    @unique
+  name     String
+  picture  String
+  register register?
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model register {
+  id                     String               @id
+  created_at             DateTime             @default(now())
+  email                  String?              @unique
+  user_id                String?              @unique
+  facebook_connection_id String?              @unique
+  facebook_connection    facebook_connection? @relation(fields: [facebook_connection_id], references: [id], onDelete: Cascade, map: "public_register_facebook_connection_id_fkey")
+  user                   user?                @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "public_register_user_id_fkey")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model user {
+  id          String    @id
+  username    String    @unique
+  displayname String?
+  picture     String?
+  register    register?
+}
