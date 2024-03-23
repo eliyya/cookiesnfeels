@@ -6,6 +6,7 @@ import { COOKIES_NAME, JWT_SECRET, snowflake } from "@/lib/constants"
 
 export async function GET(req: NextRequest) {
     const code = req.nextUrl.searchParams.get('code')
+    const redi = req.nextUrl.searchParams.get('redirect')
     if (!code) return NextResponse.redirect(new URL(`https://www.facebook.com/v13.0/dialog/oauth?client_id=${process.env.NEXT_FACEBOOK_APP_ID}&redirect_uri=${process.env.NEXT_FACEBOOK_REDIRECT_URL}&scope=email%20public_profile`))
 
     const acces = await fetch(`https://graph.facebook.com/v13.0/oauth/access_token?client_id=${process.env.NEXT_FACEBOOK_APP_ID}&client_secret=${process.env.NEXT_FACEBOOK_CLIENT_SECRET}&code=${code}&redirect_uri=${process.env.NEXT_FACEBOOK_REDIRECT_URL}`)
@@ -78,7 +79,7 @@ export async function GET(req: NextRequest) {
     const expires = new Date()
     expires.setDate(expires.getDate() + 1)
 
-    const redirection = NextResponse.redirect(new URL('/', req.nextUrl))
+    const redirection = NextResponse.redirect(new URL(redi||'/', req.nextUrl))
     redirection.cookies.set({
         name: COOKIES_NAME.session,
         expires,
