@@ -1,19 +1,13 @@
 'use client'
 
 import { usePost } from "@/lib/global"
-import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
 import { Code } from "./Code";
 
 
 export function Steps(props: { createSnowflake: () => Promise<string> }) {
     const {steps, setSteps} = usePost()
 
-    const createStep = () => props.createSnowflake().then(id => setSteps([...steps, { id, content: '', pos: (Math.max(0,...steps.map(s => s.pos)))+1 }]))
-
-    const onChange = (id: string) => (content = '') => {
-        if (content.endsWith('\n')) createStep()
-        setSteps(steps.map(s => s.id === id ? { ...s, content } : s))
-    }
+    const createStep = () => props.createSnowflake().then(id => setSteps([...steps.map(s => ({...s,focus:false})), { id, content: '', pos: (Math.max(0,...steps.map(s => s.pos)))+1, focus: true }]))
     
     const deleteStep = (id: string) => () => setSteps(steps.filter(s => s.id !== id))
 
@@ -23,7 +17,7 @@ export function Steps(props: { createSnowflake: () => Promise<string> }) {
                 steps.map(step => (
                     <li key={step.id} className="flex align-middle" >
                         <i>*</i>
-                        <Code id={step.id} />
+                        <Code id={step.id} newLine={createStep} focus={!!step.focus} />
                         {/* <textarea 
                             value={step.content} 
                             onChange={onChange(step.id)}

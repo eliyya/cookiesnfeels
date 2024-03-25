@@ -11,6 +11,7 @@ type Ingredient = {
 type Step = {
     pos:number
     id:SnowflakeId
+    focus?:boolean
     content:string
 }
 
