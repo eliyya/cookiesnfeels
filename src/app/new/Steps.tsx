@@ -18,11 +18,6 @@ export function Steps(props: { createSnowflake: () => Promise<string> }) {
                     <li key={step.id} className="flex align-middle" >
                         <i>*</i>
                         <Code id={step.id} newLine={createStep} focus={!!step.focus} />
-                        {/* <textarea 
-                            value={step.content} 
-                            onChange={onChange(step.id)}
-                            className="bg-transparent flex-grow rounded-md border-gray-500 focus:outline-none border p-1 m-1" 
-                        /> */}
                         <button onClick={deleteStep(step.id)}>X</button>
                     </li>
                 ))
