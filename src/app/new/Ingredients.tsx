@@ -20,6 +20,7 @@ export function Ingredients(props: { createSnowflake: () => Promise<string> }) {
                         <i>*</i>
                         <input
                             type="text"
+                            onKeyUp={e => e.key === 'Enter' && createIngredient()}
                             className="m-1 bg-transparent focus:outline-none border-b"
                             value={i.name}
                             onChange={onChange(i.id)}
