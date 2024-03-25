@@ -1,4 +1,5 @@
-import { CreatePost } from "./Preview" 
+import { Steps } from "./Steps"
+import { Preview } from "./Preview" 
 import { Ingredients } from "./Ingredients"
 import { snowflake } from "@/lib/constants"
 
@@ -8,15 +9,18 @@ export default async function NewPage() {
         return snowflake.generate().toString()
     }
     return (
-        <main className="w-screen h-screen flex">
-            <div className="bg-slate-800 p-4 flex-grow-[0.5]">
+        <main className="w-screen h-screen grid grid-cols-2">
+            <div className="p-4">
                 <section>
+                    <h2>Ingredients</h2>
                     <Ingredients createSnowflake={createSnowflake} />
                 </section>
+                <section>
+                    <h2>Steps</h2>
+                    <Steps createSnowflake={createSnowflake} />
+                </section>
             </div>
-            <div className="p-4 flex-grow-[0.5]">
-                <CreatePost />
-            </div>
+            <Preview className="p-4" />
         </main>
     )
 }

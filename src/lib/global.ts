@@ -20,6 +20,7 @@ type Store = {
     setIngredients: (ingredients: Ingredient[]) => void
     steps: Step[]
     setSteps: (steps: Step[]) => void
+    modifyStep: (id:SnowflakeId, content:string) => void
 }
 
 export const usePost = create<Store>((set) => ({
@@ -44,5 +45,10 @@ export const usePost = create<Store>((set) => ({
     setSteps: (steps) => set(() => {
         window.localStorage.setItem(STORAGES_NAME.post, JSON.stringify({ steps }))
         return { steps }
+    }),
+    modifyStep: (id, content) => set(({steps}) => {
+        const step = steps.find(s => s.id === id)
+        if(step) step.content = content
+        return {steps: [...steps]}
     })
 }))
