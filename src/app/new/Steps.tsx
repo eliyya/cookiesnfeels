@@ -7,7 +7,12 @@ import { Code } from "./Code";
 export function Steps(props: { createSnowflake: () => Promise<string> }) {
     const {steps, setSteps} = usePost()
 
-    const createStep = () => props.createSnowflake().then(id => setSteps([...steps.map(s => ({...s,focus:false})), { id, content: '', pos: (Math.max(0,...steps.map(s => s.pos)))+1, focus: true }]))
+    const createStep = () => props
+        .createSnowflake()
+        .then(id => setSteps([
+            ...steps.map(s => ({...s,focus:false})), 
+            { id, content: '', pos: (Math.max(0,...steps.map(s => s.pos)))+1, focus: true }
+        ]))
     
     const deleteStep = (id: string) => () => setSteps(steps.filter(s => s.id !== id))
 
