@@ -2,7 +2,7 @@
 
 import { usePost } from '@/lib/global';
 import { Editor } from '@monaco-editor/react';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export type IStandaloneCodeEditor = Parameters<Exclude<Parameters<typeof Editor>[0]['onMount'], undefined>>[0]
 export type IModelContentChangedEvent = Parameters<Exclude<Parameters<typeof Editor>[0]['onChange'], undefined>>[1]
@@ -29,10 +29,10 @@ export function Code({id, newLine, focus}:{id:string, newLine():void, focus?:boo
         <Editor 
             height="100px"
             theme="vs-dark"
-            className="m-1`"
+            className="m-1"
             language="markdown"
             options={{
-                // lineNumbers:'off',
+                lineNumbers:'off',
                 minimap: { enabled: false },
                 scrollbar: { vertical: 'hidden' },
                 wordWrap: 'on'
