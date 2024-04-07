@@ -43,6 +43,6 @@ export function Code({id, newLine, focus}:{id:string, newLine():void, focus?:boo
                 ref.current = editor;
                 if (focus) editor.focus()
             }}
-        ></Editor>
+        />
     )
 }
