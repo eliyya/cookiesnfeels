@@ -1,23 +1,31 @@
-import Nav from "@/components/nav";
+import Image from "next/image";
+
 
 export default async function Home() {
   return (
     <main className="h-screen w-screen">
-      <Nav />
-      <div className="h-full w-full grid grid-cols-9 bg-[#FFD1FB]">
-        <div className="col-span-1 grid grid-flow-col justify-center bg-[#C288B0] ">
-          <ul className="flex flex-col  gap-8 mt-20 ">
-            <li className="font-black text-stone-50 ">inicio</li>
-            <li>blog</li>
-            <li>platillos</li>
-            <li>perfil</li>
-          </ul>
-        </div>
-        <div className="col-span-8 flex flex-col justify-center items-center">
-          <main className="flex flex-col justify-center items-center bg">
-          </main>
-        </div>
-      </div>
+      <header className="">
+        <nav className="flex ">
+          <div className="flex-1 bg-gray-800 text-white text-center p-4">
+            <a href="/home">Home</a>
+          </div>
+          <div className="flex-1 bg-gray-800 text-white text-center p-4">
+            <a href="/about">resetas</a>
+          </div>
+          <div className="flex-1 bg-gray-800 text-white text-center p-4">
+            <a href="/contact">perfil</a>
+          </div>
+        </nav>
+      </header>
+      <section className="flex justify-center items-center h-full">
+        <main className="grid grid-col grid-cols-3 justify-center items-center  w-72 h-72">
+          <Image src="/4c34f0e70d69de7ca67c61cc6457d0b1.jpg" height={100} width={100} alt="imagen de comida" className="col-span-1 col-start-2"></Image>
+          <div className=" col-span-2 col-start-2 ">
+            <h1>Recetas</h1>
+            <p>Recetas de comida</p>
+          </div>
+        </main>
+      </section>
     </main>
   );
 }
